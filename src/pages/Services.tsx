@@ -1,0 +1,17 @@
+import { useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import { ButtonLink, ImageFrame, PageHero, SectionHeading, Seo, pageImages } from '@/components/Layout';
+import { Icon } from '@/components/Icons';
+import { services } from '@/data/services';
+
+export default function Services() {
+  useEffect(() => { const hash = window.location.hash; if (hash) window.setTimeout(() => document.querySelector(hash)?.scrollIntoView({ behavior: 'smooth', block: 'start' }), 120); }, []);
+  return <main>
+    <Seo title="Cleaning Services" description="Explore residential, deep, move-in and move-out, post-construction, and office cleaning services from VNR Professional LLC Cleaning." />
+    <PageHero eyebrow="Services" title="A cleaner space, on your terms." text="Thoughtful residential and commercial cleaning for the moments when your space needs a reset, a fresh start or steady care." image={pageImages.kitchenWide}><ButtonLink to="/contact">Tell us what you need</ButtonLink></PageHero>
+    <section className="section services-intro"><div className="container narrow-copy"><span className="eyebrow">Five ways we help</span><h2>Built around the way your space actually works.</h2><p>Every service starts with a conversation about the rooms, surfaces and details that matter to you. Then we bring a clear plan and a careful finish.</p></div></section>
+    <section className="service-details-list">{services.map((service, index) => <article className={`service-detail ${index % 2 ? 'service-detail--reverse' : ''}`} id={service.slug} key={service.slug}><div className="service-detail-image"><ImageFrame src={pageImages[service.image]} alt={service.title} /><span className="service-detail-index">0{index + 1}</span></div><div className="service-detail-copy"><span className="eyebrow">{service.eyebrow}</span><div className="service-detail-title"><span className="icon-round"><Icon name={service.icon as 'house'} size={25} /></span><h2>{service.title}</h2></div><p>{service.description}</p><ul className="check-list">{service.bullets.map((bullet) => <li key={bullet}><Icon name="check" size={17} />{bullet}</li>)}</ul>{service.note && <div className="service-note"><Icon name="sparkle" size={18} /><p>{service.note}</p></div>}<ButtonLink to={`/contact?service=${encodeURIComponent(service.title)}`}>Request this service</ButtonLink></div></article>)}</section>
+    <section className="section comparison-strip"><div className="container"><SectionHeading eyebrow="One team, two settings" title="Care that adapts to the space." /><div className="comparison-grid"><div><span className="icon-round"><Icon name="house" size={24} /></span><h3>Residential</h3><p>From everyday homes to a deep reset, we help create a space that feels comfortable, calm and cared for.</p><Link className="text-link" to="/contact?property=Home">For your home <Icon name="arrow" size={16} /></Link></div><div><span className="icon-round icon-round--blue"><Icon name="building" size={24} /></span><h3>Commercial</h3><p>For offices and commercial properties, we bring a professional finish that supports the people using the space.</p><Link className="text-link" to="/contact?property=Office">For your office <Icon name="arrow" size={16} /></Link></div></div></div></section>
+    <section className="service-cta"><div className="container service-cta-inner"><div><span className="eyebrow eyebrow--yellow">Not sure where to start?</span><h2>We can help you choose the right clean.</h2></div><ButtonLink to="/contact">Start a conversation</ButtonLink></div></section>
+  </main>;
+}

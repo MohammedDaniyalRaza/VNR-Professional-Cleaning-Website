@@ -1,0 +1,15 @@
+import { Link } from 'react-router-dom';
+import { ButtonLink, PageHero, SectionHeading, Seo, pageImages } from '@/components/Layout';
+import { Icon } from '@/components/Icons';
+import { areas } from '@/data/areas';
+import { phoneHref, phone } from '@/components/Layout';
+
+export default function ServiceAreas() {
+  return <main>
+    <Seo title="Service Areas" description="VNR Professional LLC Cleaning serves Vancouver, Battle Ground, Ridgefield, Camas, La Center, Woodland, Mount Vista and surrounding Clark County communities." />
+    <PageHero eyebrow="Where we work" title="Close to home, across Clark County." text="Based in Vancouver, WA 98665, we bring thoughtful cleaning to homes, offices and properties across our surrounding communities." image={pageImages.office}><ButtonLink to="/contact">Ask about your area</ButtonLink></PageHero>
+    <section className="section areas-intro"><div className="container"><div className="areas-intro-grid"><div><SectionHeading eyebrow="Our service area" title="Good cleaning should feel easy to reach." text="Our current service area includes the communities below. If you are nearby and do not see your city, give us a call — we are happy to talk it through." /><a className="text-link text-link--blue" href={phoneHref}>Call {phone} <Icon name="arrow" size={16} /></a></div><div className="region-map" aria-label="Stylized map of our service region"><svg viewBox="0 0 480 360" role="img"><path className="map-outline" d="M94 43 235 24l131 57-19 84 45 79-137 65-106-61-91 10 20-82-27-66 44-67Z" /><path className="map-road" d="M79 256c77-39 104-107 169-126 53-16 73-52 122-54M116 71c50 42 78 67 122 74 42 8 80 50 112 98M211 37c-16 70-17 131 5 204 10 31 11 57 3 91" /><circle cx="240" cy="148" r="8" /><circle cx="137" cy="103" r="6" /><circle cx="309" cy="220" r="6" /><circle cx="354" cy="90" r="5" /><text x="254" y="143">Vancouver</text><text x="95" y="94">Ridgefield</text><text x="315" y="235">Camas</text><text x="362" y="84">Battle Ground</text></svg><span className="map-caption"><Icon name="pin" size={16} />Stylized regional guide</span></div></div></div></section>
+    <section className="section area-grid-section"><div className="container"><div className="area-grid">{areas.map((area, index) => <Link to="/contact" className={`area-card area-card--${(index % 4) + 1}`} key={area.name}><span className="area-card-number">0{index + 1}</span><Icon name="pin" size={22} /><h3>{area.name}</h3><p>{area.detail}</p><span className="area-card-arrow"><Icon name="arrow" size={17} /></span></Link>)}</div></div></section>
+    <section className="area-callout"><div className="container area-callout-inner"><div><span className="eyebrow eyebrow--yellow">Do not see your city?</span><h2>Let’s talk about it.</h2><p>We serve Vancouver and surrounding regions. Your location may still be within reach.</p></div><div><ButtonLink to="/contact">Contact us</ButtonLink><a className="plain-phone" href={phoneHref}><Icon name="phone" size={18} />{phone}</a></div></div></section>
+  </main>;
+}
